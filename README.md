@@ -1,5 +1,7 @@
 ### AIML LAB
 
+This repository contains the programs for the 5th sem AIML Lab
+
 | No. | Program Title | Code |
 |---| ----- | -------- |
 |1|Tic Tac Toe|[code](./TicTacToe.py)|
