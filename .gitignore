@@ -1,0 +1,9 @@
+# Ignore Python virtual environment
+env/
+venv/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore sensitive details (custom files containing credentials)
+test.py
