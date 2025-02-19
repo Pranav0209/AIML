@@ -25,7 +25,7 @@ def is_winner(board, player):
 def is_board_full(board):
     return all(cell != ' ' for row in board for cell in row)
 
-def minimax(board, is_max):
+def minmax(board, is_max):
     if is_winner(board, 'X'):
         return 1
     if is_winner(board, 'O'):
@@ -38,7 +38,7 @@ def minimax(board, is_max):
         for j in range(3):
             if board[i][j] == ' ':
                 board[i][j] = 'X' if is_max else 'O'
-                score = minimax(board, not is_max)
+                score = minmax(board, not is_max)
                 board[i][j] = ' '
                 best_score = max(score, best_score) if is_max else min(score, best_score)
     return best_score
@@ -49,7 +49,7 @@ def find_best_move(board):
         for j in range(3):
             if board[i][j] == ' ':
                 board[i][j] = 'X'
-                score = minimax(board, False)
+                score = minmax(board, False)
                 board[i][j] = ' '
                 if score > best_score:
                     best_score, best_move = score, (i, j)

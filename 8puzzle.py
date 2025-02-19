@@ -17,23 +17,29 @@ def move(state,direction):
     return new_state
 def calculate_heuristic(state,goal_state):
     return sum(1 for i in range(3) for j in range(3) if state[i][j]!=goal_state[i][j] and state[i][j]!=0)
-def a_star(initial_state,goal_state):
-    OPEN=[(0,0,initial_state)]
-    CLOSED=set()
+def a_star(initial_state, goal_state, max_iter=1000):
+    OPEN = [(0, 0, initial_state)]
+    CLOSED = set()
+    iterations = 0
     while OPEN:
-        OPEN.sort(key =lambda x:x[0])
-        f,g,current_state=OPEN.pop(0)
-        CLOSED.add(tuple(map(tuple,current_state)))
-        print_state(current_state)
-        if current_state==goal_state:
-            print("Solution found in",g,"mobes!")
+        if iterations >= max_iter:
+            print("No solution found.")
             return
-        for direction in["UP","DOWN","LEFT","RIGHT"]:
-            successor=move(current_state,direction)
-            if successor and tuple(map(tuple,successor)) not in CLOSED:
-                h=calculate_heuristic(successor,goal_state)
-                OPEN.append((g+h+1,g+1,successor))
-    print("No solution found.")
+        iterations += 1
+
+        OPEN.sort(key=lambda x: x[0])
+        f, g, current_state = OPEN.pop(0)
+        CLOSED.add(tuple(map(tuple, current_state)))
+        print_state(current_state)
+        if current_state == goal_state:
+            print("Solution found in", g, "moves!")
+            return
+        for direction in ["UP", "DOWN", "LEFT", "RIGHT"]:
+            successor = move(current_state, direction)
+            if successor and tuple(map(tuple, successor)) not in CLOSED:
+                h = calculate_heuristic(successor, goal_state)
+                OPEN.append((g + h + 1, g + 1, successor))
+    print("No solution found.") 
 initial_state=[list(map(int,input(f"Enter row {i+1} of initial state:").split())) for i in range(3)]
 goal_state=[list(map(int,input(f"Enter row {i+1} of goal state:").split())) for i in range(3)]
 a_star(initial_state,goal_state)
