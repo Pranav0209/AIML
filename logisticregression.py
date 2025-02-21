@@ -25,7 +25,7 @@ sc=StandardScaler()
 X_train_std=sc.fit_transform(X_train)
 X_test_std=sc.transform(X_test)
 weights=logistic_regression(X_train_std,y_train)
-y_pred=sigmoid(np.dot(np.hstack([np.ones((X_test.shape[0],1)),X_test_std]),weights))>0.5
+y_pred=sigmoid(np.dot(np.hstack([np.ones((X_test_std.shape[0],1)),X_test_std]),weights))>0.5
 accuracy=accuracy_score(y_test,y_pred)
 print("Accuracy: ",accuracy)
 sepal_len=float(input("Enter sepal length: "))
